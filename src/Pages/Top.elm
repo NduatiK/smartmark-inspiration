@@ -37,7 +37,16 @@ page =
         { init = init
         , update = update
         , view = view
-        , load = \_ model -> ( model, Cmd.none )
+        , load =
+            \_ model ->
+                ( model
+                , model.data
+                    |> List.indexedMap
+                        (\i x ->
+                            getSizeOfItem i
+                        )
+                    |> Cmd.batch
+                )
         , save = \_ shared -> shared
         , subscriptions = \_ -> Sub.none
         }
@@ -251,7 +260,7 @@ viewItem index ( item, itemHeight ) =
                 in
                 image
                     [ alignTop
-                    , Background.color Colors.black
+                    , Background.color Colors.backgroundBottom
                     , inFront
                         (el
                             [ alignBottom
@@ -378,7 +387,7 @@ borderRadius =
 
 
 borderColor =
-    Border.color (Colors.withAlpha 0.1 Colors.black)
+    Border.color (Colors.withAlpha 0.2 Colors.black)
 
 
 viewColumn data =

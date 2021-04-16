@@ -8,6 +8,7 @@ module Shared exposing
     , view
     )
 
+import Browser.Events
 import Browser.Navigation exposing (Key)
 import Element exposing (..)
 import Element.Font as Font
@@ -42,19 +43,19 @@ init flags url key =
 
 
 type Msg
-    = ReplaceMe
+    = WindowResized Int Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ReplaceMe ->
+        WindowResized _ _ ->
             ( model, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Browser.Events.onResize WindowResized
 
 
 
@@ -69,7 +70,11 @@ view { page, toMsg } model =
     { title = page.title
     , body =
         [ column [ height fill, width fill ]
-            [ column [ height fill, width fill ] page.body
+            [ column
+                [ height fill
+                , width fill
+                ]
+                page.body
             ]
         ]
     }
