@@ -318,10 +318,11 @@ viewItem index ( item, itemHeight ) =
 
             TodoList todos ->
                 column
-                    [ padding 12
+                    [ paddingXY 16 12
                     , Background.color (Colors.withAlpha 0.9 Colors.white)
                     , spacing 12
                     , Style.monospace
+                    , width fill
                     ]
                     [ row [ width fill ]
                         [ el [ Font.bold ] (text todos.title)
