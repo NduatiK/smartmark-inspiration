@@ -11872,15 +11872,6 @@ var $feathericons$elm_feather$FeatherIcons$menu = A2(
 				]),
 			_List_Nil)
 		]));
-var $mdgriffith$elm_ui$Internal$Model$ImportFont = F2(
-	function (a, b) {
-		return {$: 4, a: a, b: b};
-	});
-var $mdgriffith$elm_ui$Element$Font$external = function (_v0) {
-	var url = _v0.eO;
-	var name = _v0.dJ;
-	return A2($mdgriffith$elm_ui$Internal$Model$ImportFont, name, url);
-};
 var $mdgriffith$elm_ui$Internal$Model$FontFamily = F2(
 	function (a, b) {
 		return {$: 1, a: a, b: b};
@@ -11947,9 +11938,8 @@ var $mdgriffith$elm_ui$Element$Font$typeface = $mdgriffith$elm_ui$Internal$Model
 var $author$project$Style$monospace = $mdgriffith$elm_ui$Element$Font$family(
 	_List_fromArray(
 		[
+			$mdgriffith$elm_ui$Element$Font$typeface('Roboto Mono'),
 			$mdgriffith$elm_ui$Element$Font$typeface('Space Mono'),
-			$mdgriffith$elm_ui$Element$Font$external(
-			{dJ: 'Space Mono', eO: 'https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;1,700&display=swap'}),
 			$mdgriffith$elm_ui$Element$Font$monospace
 		]));
 var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 3};
