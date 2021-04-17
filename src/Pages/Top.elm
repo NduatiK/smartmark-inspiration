@@ -136,7 +136,7 @@ type Msg
 
 
 update msg model =
-    case msg |> Debug.log "msg" of
+    case msg of
         NoOp ->
             ( model, Cmd.none )
 
@@ -239,7 +239,7 @@ viewItem index ( item, itemHeight ) =
                             (text "\"")
                         , paragraph [ width fill, Font.size 14, Font.center ]
                             [ text
-                                (quoteString |> Debug.log "")
+                                quoteString
                             ]
                         ]
                     )
