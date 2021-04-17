@@ -11993,8 +11993,8 @@ var $mdgriffith$elm_ui$Element$spacing = function (x) {
 };
 var $author$project$Style$pagePadding = _List_fromArray(
 	[
-		$mdgriffith$elm_ui$Element$padding(20),
-		$mdgriffith$elm_ui$Element$spacing(20)
+		$mdgriffith$elm_ui$Element$padding(32),
+		$mdgriffith$elm_ui$Element$spacing(32)
 	]);
 var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
 	return {$: 0, a: a};
@@ -12623,7 +12623,7 @@ var $author$project$Pages$SmartmarkInspiration$Top$renderTodo = function (task) 
 				_Utils_ap(
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$Font$size(14),
+							$mdgriffith$elm_ui$Element$Font$size(13),
 							$mdgriffith$elm_ui$Element$centerY
 						]),
 					task.ap ? _List_fromArray(
@@ -12848,7 +12848,7 @@ var $author$project$Pages$SmartmarkInspiration$Top$viewItem = F2(
 									A2($mdgriffith$elm_ui$Element$paddingXY, 16, 12),
 									$mdgriffith$elm_ui$Element$Background$color(
 									A2($author$project$Colors$withAlpha, 0.9, $author$project$Colors$white)),
-									$mdgriffith$elm_ui$Element$spacing(12),
+									$mdgriffith$elm_ui$Element$spacing(16),
 									$author$project$Style$monospace,
 									$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
 								]),
@@ -12865,7 +12865,11 @@ var $author$project$Pages$SmartmarkInspiration$Top$viewItem = F2(
 											A2(
 											$mdgriffith$elm_ui$Element$el,
 											_List_fromArray(
-												[$mdgriffith$elm_ui$Element$Font$bold]),
+												[
+													$mdgriffith$elm_ui$Element$Font$size(15),
+													$mdgriffith$elm_ui$Element$Font$bold,
+													$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+												]),
 											$mdgriffith$elm_ui$Element$text(todos.eH)),
 											A2(
 											$mdgriffith$elm_ui$Element$el,
@@ -12966,7 +12970,7 @@ var $author$project$Pages$SmartmarkInspiration$Top$viewColumn = function (data) 
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$spacing(12)
+				$mdgriffith$elm_ui$Element$spacing(16)
 			]),
 		A2(
 			$elm$core$List$map,
@@ -12974,7 +12978,7 @@ var $author$project$Pages$SmartmarkInspiration$Top$viewColumn = function (data) 
 				if (!x.$) {
 					var items = x.a;
 					return viewMasonry(
-						{bB: 2, bc: items, b$: 0, bm: 10, cs: renderItem});
+						{bB: 2, bc: items, b$: 0, bm: 16, cs: renderItem});
 				} else {
 					var item = x.a;
 					return A2($author$project$Pages$SmartmarkInspiration$Top$viewItem, -1, item);

@@ -14,6 +14,6 @@ monospace =
 
 
 pagePadding =
-    [ padding 20
-    , spacing 20
+    [ padding 32
+    , spacing 32
     ]

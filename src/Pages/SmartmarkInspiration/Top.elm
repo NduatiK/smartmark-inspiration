@@ -320,12 +320,12 @@ viewItem index ( item, itemHeight ) =
                 column
                     [ paddingXY 16 12
                     , Background.color (Colors.withAlpha 0.9 Colors.white)
-                    , spacing 12
+                    , spacing 16
                     , Style.monospace
                     , width fill
                     ]
                     [ row [ width fill ]
-                        [ el [ Font.bold ] (text todos.title)
+                        [ el [ Font.size 15, Font.bold, width fill ] (text todos.title)
                         , el [ alignRight ] (Icons.iconElement FeatherIcons.moreHorizontal)
                         ]
                     , column [ width fill, spacing 12 ]
@@ -361,7 +361,7 @@ renderTodo task =
                 ]
                 (el [ width (px 14), height (px 14) ] none)
         , el
-            ([ Font.size 14
+            ([ Font.size 13
              , centerY
              ]
                 ++ (if task.done then
@@ -468,7 +468,7 @@ viewColumn data =
                         viewMasonry
                             { items = items
                             , columns = 2
-                            , spacing = 10
+                            , spacing = 16
                             , padding = 0
                             , viewItem = renderItem
                             }
@@ -476,7 +476,7 @@ viewColumn data =
                     FullWidth item ->
                         viewItem -1 item
             )
-        |> column [ spacing 12 ]
+        |> column [ spacing 16 ]
 
 
 type Mosaic item
