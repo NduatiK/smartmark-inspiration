@@ -1,4 +1,4 @@
-module Pages.Top exposing (Model, Msg, Params, page)
+module Pages.SmartmarkInspiration.Top exposing (Model, Msg, Params, page)
 
 import Array
 import Browser.Dom
