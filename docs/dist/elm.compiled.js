@@ -11738,6 +11738,11 @@ var $author$project$Pages$SmartmarkInspiration$Top$update = F2(
 				return _Utils_Tuple2(
 					model,
 					$author$project$Pages$SmartmarkInspiration$Top$getSizeOfAllItems(model.P));
+			case 3:
+				var index = msg.a;
+				return _Utils_Tuple2(
+					model,
+					$author$project$Pages$SmartmarkInspiration$Top$getSizeOfItem(index));
 			default:
 				var item = msg.a;
 				var height = msg.b;
@@ -12230,6 +12235,9 @@ var $author$project$Style$Masonry$fromItems = F2(
 			items);
 	});
 var $elm$core$Basics$truncate = _Basics_truncate;
+var $author$project$Pages$SmartmarkInspiration$Top$RecalulateSizeAt = function (a) {
+	return {$: 3, a: a};
+};
 var $mdgriffith$elm_ui$Internal$Model$Bottom = 2;
 var $mdgriffith$elm_ui$Element$alignBottom = $mdgriffith$elm_ui$Internal$Model$AlignY(2);
 var $mdgriffith$elm_ui$Internal$Model$Transparency = F2(
@@ -12564,6 +12572,17 @@ var $mdgriffith$elm_ui$Element$moveUp = function (y) {
 		$mdgriffith$elm_ui$Internal$Flag$moveY,
 		$mdgriffith$elm_ui$Internal$Model$MoveY(-y));
 };
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
 var $mdgriffith$elm_ui$Element$paddingXY = F2(
 	function (x, y) {
 		if (_Utils_eq(x, y)) {
@@ -12869,7 +12888,13 @@ var $author$project$Pages$SmartmarkInspiration$Top$viewItem = F2(
 									A2(
 										$mdgriffith$elm_ui$Element$maximum,
 										400,
-										A2($mdgriffith$elm_ui$Element$minimum, 100, $mdgriffith$elm_ui$Element$shrink)))
+										A2($mdgriffith$elm_ui$Element$minimum, 100, $mdgriffith$elm_ui$Element$shrink))),
+									$mdgriffith$elm_ui$Element$htmlAttribute(
+									A2(
+										$elm$html$Html$Events$on,
+										'load',
+										$elm$json$Json$Decode$succeed(
+											$author$project$Pages$SmartmarkInspiration$Top$RecalulateSizeAt(index))))
 								]),
 							{bD: 'Internet image for url', cg: imageUrl});
 					case 3:
@@ -12900,7 +12925,13 @@ var $author$project$Pages$SmartmarkInspiration$Top$viewItem = F2(
 									A2(
 										$mdgriffith$elm_ui$Element$maximum,
 										400,
-										A2($mdgriffith$elm_ui$Element$minimum, 100, $mdgriffith$elm_ui$Element$shrink)))
+										A2($mdgriffith$elm_ui$Element$minimum, 100, $mdgriffith$elm_ui$Element$shrink))),
+									$mdgriffith$elm_ui$Element$htmlAttribute(
+									A2(
+										$elm$html$Html$Events$on,
+										'load',
+										$elm$json$Json$Decode$succeed(
+											$author$project$Pages$SmartmarkInspiration$Top$RecalulateSizeAt(index))))
 								]),
 							{bD: 'Internet image for url', cg: imageUrl});
 					default:

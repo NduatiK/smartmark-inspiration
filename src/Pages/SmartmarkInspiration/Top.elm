@@ -10,7 +10,9 @@ import Element.Font as Font
 import FeatherIcons
 import Html
 import Html.Attributes
+import Html.Events
 import Icons
+import Json.Decode
 import Process
 import Shared
 import Spa.Document exposing (Document)
@@ -140,6 +142,7 @@ type Msg
     = NoOp
     | SetHeightOfIndex Int Float
     | RecalulateSize
+    | RecalulateSizeAt Int
 
 
 update msg model =
@@ -149,6 +152,9 @@ update msg model =
 
         RecalulateSize ->
             ( model, getSizeOfAllItems model.data )
+
+        RecalulateSizeAt index ->
+            ( model, getSizeOfItem index )
 
         SetHeightOfIndex item height ->
             let
@@ -289,6 +295,7 @@ viewItem index ( item, itemHeight ) =
                             |> minimum 100
                             |> maximum 400
                         )
+                    , htmlAttribute (Html.Events.on "load" (Json.Decode.succeed (RecalulateSizeAt index)))
                     ]
                     { src = imageUrl
                     , description = "Internet image for url"
@@ -321,6 +328,7 @@ viewItem index ( item, itemHeight ) =
                             |> minimum 100
                             |> maximum 400
                         )
+                    , htmlAttribute (Html.Events.on "load" (Json.Decode.succeed (RecalulateSizeAt index)))
                     ]
                     { src = imageUrl
                     , description = "Internet image for url"
