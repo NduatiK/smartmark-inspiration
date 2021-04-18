@@ -5,11 +5,11 @@ import Element.Background exposing (gradient)
 
 
 backgroundTop =
-    rgb255 231 252 253
+    rgb255 170 244 248
 
 
 backgroundBottom =
-    rgb255 226 213 251
+    rgb255 202 173 255
 
 
 backgroundGradient =

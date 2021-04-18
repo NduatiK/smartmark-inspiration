@@ -11,6 +11,7 @@ import FeatherIcons
 import Html
 import Html.Attributes
 import Icons
+import Process
 import Shared
 import Spa.Document exposing (Document)
 import Spa.Page as Page exposing (Page)
@@ -61,13 +62,18 @@ init _ url =
     ( { url = url
       , data = data
       }
-    , data
+    , Process.sleep 100
+        |> Task.perform (\_ -> RecalulateSize)
+    )
+
+
+getSizeOfAllItems data =
+    data
         |> List.indexedMap
             (\i x ->
                 getSizeOfItem i
             )
         |> Cmd.batch
-    )
 
 
 getSizeOfItem : Int -> Cmd Msg
@@ -133,12 +139,16 @@ buildData =
 type Msg
     = NoOp
     | SetHeightOfIndex Int Float
+    | RecalulateSize
 
 
 update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+
+        RecalulateSize ->
+            ( model, getSizeOfAllItems model.data )
 
         SetHeightOfIndex item height ->
             let

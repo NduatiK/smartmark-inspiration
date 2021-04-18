@@ -7,6 +7,7 @@ module Spa.Document exposing
 import Browser
 import Colors
 import Element exposing (..)
+import Html.Attributes
 
 
 type alias Document msg =
@@ -31,6 +32,13 @@ toBrowserDocument doc =
             , height fill
             , Colors.backgroundGradient
             ]
-            (column [ width fill, height fill ] doc.body)
+            (column
+                [ width fill
+                , height fill
+                , htmlAttribute
+                    (Html.Attributes.class "noisy")
+                ]
+                doc.body
+            )
         ]
     }
