@@ -30,13 +30,13 @@ toBrowserDocument doc =
         [ Element.layout
             [ width fill
             , height fill
-            , Colors.backgroundGradient
             ]
             (column
                 [ width fill
                 , height fill
-                , htmlAttribute
-                    (Html.Attributes.class "noisy")
+                -- , htmlAttribute
+                --     (Html.Attributes.class "noisy")
+                -- , Colors.backgroundGradient
                 ]
                 doc.body
             )

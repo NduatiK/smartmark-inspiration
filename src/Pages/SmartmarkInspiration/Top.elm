@@ -7,6 +7,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
+import Element.Input as Input
 import FeatherIcons
 import Html
 import Html.Attributes
@@ -31,6 +32,7 @@ type alias Params =
 type alias Model =
     { url : Url Params
     , data : List ( Item, Float )
+    , isTablet : Bool
     }
 
 
@@ -63,6 +65,7 @@ init _ url =
     in
     ( { url = url
       , data = data
+      , isTablet = False
       }
     , Process.sleep 100
         |> Task.perform (\_ -> RecalulateSize)
@@ -143,12 +146,16 @@ type Msg
     | SetHeightOfIndex Int Float
     | RecalulateSize
     | RecalulateSizeAt Int
+    | ToggleIsTablet
 
 
 update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+
+        ToggleIsTablet ->
+            ( { model | isTablet = not model.isTablet }, getSizeOfAllItems model.data )
 
         RecalulateSize ->
             ( model, getSizeOfAllItems model.data )
@@ -166,7 +173,7 @@ update msg model =
                 | data =
                     array
                         |> Array.get item
-                        |> Maybe.map (Tuple.mapSecond (\_ -> height))
+                        |> Maybe.map (Tuple.mapSecond (\_ -> min 200 height))
                         |> Maybe.map
                             (\value ->
                                 Array.set item value array
@@ -187,8 +194,14 @@ view model =
     { title = "Homepage"
     , body =
         [ column
-            (width fill
-                :: Style.pagePadding
+            ([ behindContent
+                (el [ Background.color (Colors.withAlpha 0.6 Colors.backgroundTop), width fill, height fill ] none)
+             , Style.sticky
+             , Style.zIndex 10
+             , width fill
+             ]
+                ++ Style.backgroundBlur 10
+                ++ Style.pagePadding
             )
             [ row [ width fill ]
                 [ el
@@ -206,8 +219,30 @@ view model =
 
             -- , wrappedRow [ width fill, spacing 12 ]
             --     (List.indexedMap (\i d -> viewItem -i d) model.data)
-            , viewColumn model.data
             ]
+        , el
+            (width
+                (fill
+                    |> maximum
+                        (if model.isTablet then
+                            700
+
+                         else
+                            400
+                        )
+                )
+                :: centerX
+                :: Style.pagePadding
+            )
+            (viewColumn model)
+        , el [ moveRight 32 ]
+            (Input.checkbox []
+                { label = Input.labelRight [] (text "Is tablet")
+                , onChange = always ToggleIsTablet
+                , checked = model.isTablet
+                , icon = Input.defaultCheckbox
+                }
+            )
         ]
     }
 
@@ -293,7 +328,7 @@ viewItem index ( item, itemHeight ) =
                     , height
                         (shrink
                             |> minimum 100
-                            |> maximum 400
+                            |> maximum 200
                         )
                     , htmlAttribute (Html.Events.on "load" (Json.Decode.succeed (RecalulateSizeAt index)))
                     ]
@@ -326,7 +361,7 @@ viewItem index ( item, itemHeight ) =
                     , height
                         (shrink
                             |> minimum 100
-                            |> maximum 400
+                            |> maximum 200
                         )
                     , htmlAttribute (Html.Events.on "load" (Json.Decode.succeed (RecalulateSizeAt index)))
                     ]
@@ -409,7 +444,7 @@ borderColor =
     Border.color (Colors.withAlpha 0.2 Colors.black)
 
 
-viewColumn data =
+viewColumn { data, isTablet } =
     let
         renderItem pos item hei =
             el [ width fill, height (px hei) ]
@@ -485,7 +520,14 @@ viewColumn data =
                     Mosaic items ->
                         viewMasonry
                             { items = items
-                            , columns = 2
+                            , columns =
+                                if isTablet then
+                                    3
+
+                                else
+                                    2
+
+                            -- , columns = 3
                             , spacing = 16
                             , padding = 0
                             , viewItem = renderItem

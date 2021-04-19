@@ -1,5 +1,10 @@
-body {
-    /* height: auto; */
+/* * {
+    box-sizing: border-box;
+} */
+div.s.sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
 }
 
 .navbar {

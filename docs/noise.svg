@@ -9,7 +9,5 @@
               baseFrequency='0.95'
               stitchTiles='stitch'/>
     </filter>
-
-    <!-- <rect width='300' height='300' fill='#fff'/> -->
     <rect width='300' height='300' filter="url(#n)" opacity='0.40'/>
 </svg>
